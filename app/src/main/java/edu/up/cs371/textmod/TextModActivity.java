@@ -27,8 +27,14 @@ import java.util.ArrayList;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
+
+
     // array-list that contains our images to display
     private ArrayList<Bitmap> images;
+
+    protected Button clearButton;
+    protected Button lowerButton;
+
 
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
@@ -96,10 +102,18 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         upperCase.setOnClickListener(this);
 
 
-        editSandbox = (EditText)findViewById(R.id.editText);
+       
 
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
+
+        clearButton = (Button)findViewById(R.id.button);
+        clearButton.setOnClickListener(this);
+
+        editSandbox = (EditText)findViewById(R.id.editText);
+
+        lowerButton = (Button)findViewById(R.id.button7);
+        lowerButton.setOnClickListener(this);
 
 
 
@@ -136,36 +150,16 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.button4) {
-            String normal = this.editSandbox.getText().toString();
-            String reversed = "";
-            int length = normal.length();
-            for (int i = (length - 1); i >= 0; i--) {
-                reversed = reversed + normal.charAt(i);
-            }
-            this.editSandbox.setText(reversed);
-        } else if (v.getId() == R.id.button6) {
-            String lower = this.editSandbox.getText().toString();
-            this.editSandbox.setText(lower.toUpperCase());
-
+        if (v.getId()==R.id.button)
+        {
+            this.editSandbox.setText("");
         }
-            else if (v.getId() == R.id.button2) {
-                
-                append = spinner.getSelectedItem().toString();
-                editSandbox.setText(editSandbox.getText() + " " + append);
-            }
-
-
         else if (v.getId()==R.id.button7)
         {
             String input = this.editSandbox.getText().toString();
             this.editSandbox.setText(input.toLowerCase());
         }
-           else if (v.getId()==R.id.button)
-            {
-                this.editSandbox.setText("");
-            }
-        
+
     }
 
     /**
