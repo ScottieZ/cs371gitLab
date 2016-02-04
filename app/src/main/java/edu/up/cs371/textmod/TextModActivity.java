@@ -104,7 +104,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         editSandbox = (EditText)findViewById(R.id.editText);
 
-
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
 
@@ -164,11 +163,11 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             this.editSandbox.setText(lower.toUpperCase());
 
         }
-            else if (v.getId() == R.id.button2) {
+        else if (v.getId() == R.id.button2) {
 
-                append = spinner.getSelectedItem().toString();
-                editSandbox.setText(editSandbox.getText() + " " + append);
-            }
+            append = spinner.getSelectedItem().toString();
+            editSandbox.setText(editSandbox.getText() + " " + append);
+        }
 
 
         else if (v.getId()==R.id.button7)
@@ -176,11 +175,10 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             String input = this.editSandbox.getText().toString();
             this.editSandbox.setText(input.toLowerCase());
         }
-           else if (v.getId()==R.id.button)
-            {
-                this.editSandbox.setText("");
-            }
-
+        else if (v.getId()==R.id.button)
+        {
+            this.editSandbox.setText("");
+        }
     }
 
     /**
