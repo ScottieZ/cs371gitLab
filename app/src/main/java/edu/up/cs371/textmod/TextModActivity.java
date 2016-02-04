@@ -116,7 +116,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         lowerButton.setOnClickListener(this);
 
 
-
     }
 
 
@@ -158,6 +157,10 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         {
             String input = this.editSandbox.getText().toString();
             this.editSandbox.setText(input.toLowerCase());
+        }
+        else if (v.getId() == R.id.button6) {
+            String input = this.editSandbox.getText().toString();
+            this.editSandbox.setText(input.toUpperCase());
         }
 
     }
