@@ -150,7 +150,6 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
            
             if (v.getId() == R.id.button2) {
-                
                 append = spinner.getSelectedItem().toString();
                 editSandbox.setText(editSandbox.getText() + " " + append);
             }
