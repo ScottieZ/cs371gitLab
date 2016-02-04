@@ -16,14 +16,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import java.util.ArrayList;
 
-public class TextModActivity extends ActionBarActivity {
+
+public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
     // array-list that contains our images to display
     private ArrayList<Bitmap> images;
+
+    protected Button clearButton;
+    protected EditText editSandbox;
+    protected Button lowerButton;
+    protected Spinner spinner;
+
 
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
@@ -44,7 +53,7 @@ public class TextModActivity extends ActionBarActivity {
         // Set up the spinner so that it shows the names in the spinner array resources
         //
         // get spinner object
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner)findViewById(R.id.spinner);
         // get array of strings
         String[] spinnerNames = getResources().getStringArray(R.array.spinner_names);
         // create adapter with the strings
@@ -72,6 +81,14 @@ public class TextModActivity extends ActionBarActivity {
 
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
+
+        clearButton = (Button)findViewById(R.id.button);
+        clearButton.setOnClickListener(this);
+
+        editSandbox = (EditText)findViewById(R.id.editText);
+
+        lowerButton = (Button)findViewById(R.id.button7);
+        lowerButton.setOnClickListener(this);
 
     }
 
@@ -101,6 +118,21 @@ public class TextModActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (v.getId()==R.id.button)
+        {
+            this.editSandbox.setText("");
+        }
+        else if (v.getId()==R.id.button7)
+        {
+            String input = this.editSandbox.getText().toString();
+            this.editSandbox.setText(input.toLowerCase());
+        }
+
     }
 
     /**
