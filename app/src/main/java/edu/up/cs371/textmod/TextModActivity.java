@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
@@ -35,6 +38,10 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     protected Button upperCase = null;
 
+  
+    protected String append;
+    protected Button copyName;
+    protected Spinner spinner;
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
      */
@@ -51,7 +58,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         // Set up the spinner so that it shows the names in the spinner array resources
         //
         // get spinner object
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         // get array of strings
         String[] spinnerNames = getResources().getStringArray(R.array.spinner_names);
         // create adapter with the strings
@@ -70,12 +77,16 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
         // loop through, adding one image per string
         for (int i = 0; i < spinnerNames.length; i++) {
             // determine the index; use 0 if out of bounds
-            int id = imageIds2.getResourceId(i,0);
-            if (id == 0) id = imageIds2.getResourceId(0,0);
+            int id = imageIds2.getResourceId(i, 0);
+            if (id == 0) id = imageIds2.getResourceId(0, 0);
             // load the image; add to arraylist
             Bitmap img = BitmapFactory.decodeResource(getResources(), id);
             images.add(img);
         }
+        append = "";
+        copyName = (Button)findViewById(R.id.button2);
+        editSandbox = (EditText)findViewById(R.id.editText);
+        copyName.setOnClickListener(this);
 
         // initialize reverseButton
         reverseButton = (Button)findViewById(R.id.button4);
@@ -89,6 +100,8 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
+
+
 
     }
 
@@ -123,7 +136,7 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button4) {
+        if (v.getId() == R.id.button4) {
             String normal = this.editSandbox.getText().toString();
             String reversed = "";
             int length = normal.length();
@@ -131,10 +144,17 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
                 reversed = reversed + normal.charAt(i);
             }
             this.editSandbox.setText(reversed);
-        }
-        else if (v.getId() == R.id.button6) {
+        } else if (v.getId() == R.id.button6) {
             String lower = this.editSandbox.getText().toString();
             this.editSandbox.setText(lower.toUpperCase());
+
+           
+            if (v.getId() == R.id.button2) {
+                
+                append = spinner.getSelectedItem().toString();
+                editSandbox.setText(editSandbox.getText() + " " + append);
+            }
+
         }
     }
 
