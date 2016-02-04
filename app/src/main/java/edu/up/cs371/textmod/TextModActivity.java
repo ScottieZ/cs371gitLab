@@ -16,17 +16,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import java.util.ArrayList;
 
-public class TextModActivity extends ActionBarActivity {
+public class TextModActivity extends ActionBarActivity implements View.OnClickListener{
 
     // array-list that contains our images to display
     private ArrayList<Bitmap> images;
 
     // instance variables containing widgets
     private ImageView imageView; // the view that shows the image
+
+    protected EditText editSandbox = null;
+    protected Button reverseButton = null;
+
+    protected Button upperCase = null;
 
     /**
      * @see android.app.Activity#onCreate(android.os.Bundle)
@@ -70,10 +77,21 @@ public class TextModActivity extends ActionBarActivity {
             images.add(img);
         }
 
+        // initialize reverseButton
+        reverseButton = (Button)findViewById(R.id.button4);
+        reverseButton.setOnClickListener(this);
+
+        upperCase = (Button)findViewById(R.id.button6);
+        upperCase.setOnClickListener(this);
+
+
+        editSandbox = (EditText)findViewById(R.id.editText);
+
         // define a listener for the spinner
         spinner.setOnItemSelectedListener(new MySpinnerListener());
 
     }
+
 
     /**
      * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
@@ -101,6 +119,23 @@ public class TextModActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.button4) {
+            String normal = this.editSandbox.getText().toString();
+            String reversed = "";
+            int length = normal.length();
+            for (int i = (length - 1); i >= 0; i--) {
+                reversed = reversed + normal.charAt(i);
+            }
+            this.editSandbox.setText(reversed);
+        }
+        else if (v.getId() == R.id.button6) {
+            String lower = this.editSandbox.getText().toString();
+            this.editSandbox.setText(lower.toUpperCase());
+        }
     }
 
     /**
