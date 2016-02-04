@@ -148,14 +148,14 @@ public class TextModActivity extends ActionBarActivity implements View.OnClickLi
             String lower = this.editSandbox.getText().toString();
             this.editSandbox.setText(lower.toUpperCase());
 
-           
+        }
             else if (v.getId() == R.id.button2) {
                 
                 append = spinner.getSelectedItem().toString();
                 editSandbox.setText(editSandbox.getText() + " " + append);
             }
 
-        }
+
         else if (v.getId()==R.id.button7)
         {
             String input = this.editSandbox.getText().toString();
